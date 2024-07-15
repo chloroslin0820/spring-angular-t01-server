@@ -11,4 +11,6 @@ public interface PostService {
     public List<Post> getAllPosts();
 
     public Post getPostById(Long id);
+
+    public void likePost(Long id);
 }
