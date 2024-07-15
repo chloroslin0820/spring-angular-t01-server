@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.server.entity.Post;
@@ -19,7 +20,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/api/posts")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE }, maxAge = 3600)
 public class PostController {
 
     @Autowired
@@ -58,7 +59,7 @@ public class PostController {
     public ResponseEntity<?> likePost(@PathVariable Long id) {
         try {
             postService.likePost(id);
-            return ResponseEntity.ok(new String[]{"Post liked successfully"});
+            return ResponseEntity.ok(new String[] { "Post liked successfully" });
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
