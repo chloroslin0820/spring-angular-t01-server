@@ -9,4 +9,6 @@ public interface PostService {
     public Post savePost(Post post);
 
     public List<Post> getAllPosts();
+
+    public Post getPostById(Long id);
 }
